@@ -1,0 +1,24 @@
+PostScriptum
+============
+
+It better to write your tests as you develop the application, but sometime you somehow end up with an application that is finished and runs fine but the test coverage sucks, and you wish for a way to quickly add tests to be able to sleep better. I also may find it useful for insuring against regressions in somebody else's project which fallen on your laps.
+
+This plugin records all requests received by the application in a format suitable for copy-and-pasting into Rails integration tests. It does some introspection on request and response objects to identify actions performed and how it changed the state of the system. 
+
+Compatibility
+=============
+
+It has been tested with Rails 2.3.9.
+
+
+Installation
+============
+
+You need to insert an "around filter" in your ApplicationController in the following way:
+
+class ApplicationController < ActionController::Base
+  prepend_around_filter PostScriptumWriter if ENV['RAILS_ENV'] == 'development'
+...
+
+
+Copyright (c) 2010 Red Leaf Software LLC, released under the MIT license
